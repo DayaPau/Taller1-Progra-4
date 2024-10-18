@@ -1,8 +1,14 @@
-﻿namespace Taller1.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Taller1.Models
 {
     public class Jugadores
+
     {
-        public int nombre { get; set; }
-        public string edad { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Posición { get; set; }
+        public string Equipo { get; set; }
     }
 }
