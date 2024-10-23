@@ -8,6 +8,6 @@
         public int Ciudad { get; set; }
         public string Titulos { get; set; }
         
-        public string AceptaExtranjeros { get; set; }
+        public bool AceptaExtranjeros { get; set; }
     }
 }
