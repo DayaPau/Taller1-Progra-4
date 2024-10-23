@@ -10,22 +10,22 @@ using Taller1.Models;
 
 namespace Taller1.Controllers
 {
-    public class EstadiosController : Controller
+    public class EquipoController : Controller
     {
         private readonly Taller1Context _context;
 
-        public EstadiosController(Taller1Context context)
+        public EquipoController(Taller1Context context)
         {
             _context = context;
         }
 
-        // GET: Estadios
+        // GET: Equipoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Estadio.ToListAsync());
+            return View(await _context.Equipo.ToListAsync());
         }
 
-        // GET: Estadios/Details/5
+        // GET: Equipoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Taller1.Controllers
                 return NotFound();
             }
 
-            var estadio = await _context.Estadio
+            var equipo = await _context.Equipo
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (estadio == null)
+            if (equipo == null)
             {
                 return NotFound();
             }
 
-            return View(estadio);
+            return View(equipo);
         }
 
-        // GET: Estadios/Create
+        // GET: Equipoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Estadios/Create
+        // POST: Equipoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Direccion,Ciudad,Capacidad")] Estadio estadio)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Ciudad,Titulos,AceptaExtranjeros")] Equipo equipo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(estadio);
+                _context.Add(equipo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(estadio);
+            return View(equipo);
         }
 
-        // GET: Estadios/Edit/5
+        // GET: Equipoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Taller1.Controllers
                 return NotFound();
             }
 
-            var estadio = await _context.Estadio.FindAsync(id);
-            if (estadio == null)
+            var equipo = await _context.Equipo.FindAsync(id);
+            if (equipo == null)
             {
                 return NotFound();
             }
-            return View(estadio);
+            return View(equipo);
         }
 
-        // POST: Estadios/Edit/5
+        // POST: Equipoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Direccion,Ciudad,Capacidad")] Estadio estadio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Ciudad,Titulos,AceptaExtranjeros")] Equipo equipo)
         {
-            if (id != estadio.Id)
+            if (id != equipo.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Taller1.Controllers
             {
                 try
                 {
-                    _context.Update(estadio);
+                    _context.Update(equipo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EstadioExists(estadio.Id))
+                    if (!EquipoExists(equipo.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Taller1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(estadio);
+            return View(equipo);
         }
 
-        // GET: Estadios/Delete/5
+        // GET: Equipoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace Taller1.Controllers
                 return NotFound();
             }
 
-            var estadio = await _context.Estadio
+            var equipo = await _context.Equipo
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (estadio == null)
+            if (equipo == null)
             {
                 return NotFound();
             }
 
-            return View(estadio);
+            return View(equipo);
         }
 
-        // POST: Estadios/Delete/5
+        // POST: Equipoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var estadio = await _context.Estadio.FindAsync(id);
-            if (estadio != null)
+            var equipo = await _context.Equipo.FindAsync(id);
+            if (equipo != null)
             {
-                _context.Estadio.Remove(estadio);
+                _context.Equipo.Remove(equipo);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EstadioExists(int id)
+        private bool EquipoExists(int id)
         {
-            return _context.Estadio.Any(e => e.Id == id);
+            return _context.Equipo.Any(e => e.Id == id);
         }
     }
 }

@@ -5,7 +5,7 @@
 namespace Taller1.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracionInicial : Migration
+    public partial class Migracion1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Taller1.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ciudad = table.Column<int>(type: "int", nullable: false),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Titulos = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AceptaExtranjeros = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -32,9 +32,9 @@ namespace Taller1.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Capacidad = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Capacidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,11 +47,11 @@ namespace Taller1.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Posición = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Equipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    equipoId = table.Column<int>(type: "int", nullable: false),
-                    Edad = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Posicion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Edad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    equipoId = table.Column<int>(type: "int", nullable: true),
+                    IdEquipo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,8 +60,7 @@ namespace Taller1.Migrations
                         name: "FK_Jugadores_Equipo_equipoId",
                         column: x => x.equipoId,
                         principalTable: "Equipo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

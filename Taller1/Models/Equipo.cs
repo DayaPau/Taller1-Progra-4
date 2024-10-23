@@ -1,7 +1,11 @@
-﻿namespace Taller1.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Taller1.Models
 {
     public class Equipo
     {
+       
+
         public int Id { get; set; }
         public string Nombre { get; set; }
 
